@@ -1,0 +1,14 @@
+machine:
+  java:
+    version: oraclejdk7
+
+test:
+  override:
+    - mvn clean package
+
+deployment:
+  gh_master:
+    branch: master
+    owner: Meiqia
+    commands:
+      - aws s3 cp target/exhibitor-*.jar s3://builds/netflix.exhibitor/

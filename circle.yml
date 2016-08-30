@@ -2,13 +2,17 @@ machine:
   java:
     version: oraclejdk8
 
-test:
+dependencies:
   override:
     - mvn clean package
+
+test:
+  override:
+    - 'true'
 
 deployment:
   gh_master:
     branch: master
     owner: Meiqia
     commands:
-      - aws s3 cp target/exhibitor-*.jar s3://builds/netflix.exhibitor/
+      - aws --region cn-north-1 s3 cp target/exhibitor-*.jar s3://builds/netflix.exhibitor/
